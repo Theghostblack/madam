@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>💖 Only For You | Romantic Gift</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    background: radial-gradient(circle at 20% 30%, #ff4d7a, #ff1a5e, #b91045);
+    background-attachment: fixed;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* floating hearts background */
+  .floating-heart {
+    position: fixed;
+    font-size: 28px;
+    animation: floatUp 9s linear infinite;
+    opacity: 0.5;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0.7; }
+    100% { transform: translateY(-15vh) rotate(15deg); opacity: 0; }
+  }
+
+  /* wrapper */
+  .app-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    z-index: 20;
+    position: relative;
+    padding-bottom: 3rem;
+  }
+
+  /* START SCREEN */
+  .start-screen {
+    background: rgba(255, 245, 250, 0.2);
+    backdrop-filter: blur(20px);
+    border-radius: 3rem;
+    width: 90%;
+    max-width: 480px;
+    margin: 2rem auto;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: all 0.4s ease;
+  }
+
+  .start-screen .gift-icon {
+    font-size: 5rem;
+    animation: gentleBeat 1.2s infinite ease;
+  }
+
+  @keyframes gentleBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); text-shadow: 0 0 15px #ffc0cb; }
+  }
+
+  .start-screen h2 {
+    font-size: 2rem;
+    color: #fff5e6;
+    margin-bottom: 0.5rem;
+  }
+
+  .start-screen p {
+    color: #fff0dd;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .open-btn {
+    background: linear-gradient(135deg, #ff2f7d, #ff0f5e);
+    border: none;
+    padding: 14px 42px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: 60px;
+    color: white;
+    cursor: pointer;
+    transition: 0.25s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }
+
+  .open-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #ff4d8c, #ff1f6a);
+  }
+
+  /* MAIN ROMANTIC CONTENT (hidden initially) */
+  .romantic-content {
+    display: none;
+    width: 100%;
+    max-width: 600px;
+    margin: 1rem auto;
+    animation: fadeSlideUp 0.8s ease;
+  }
+
+  @keyframes fadeSlideUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .glass-card {
+    background: rgba(255, 245, 250, 0.2);
+    backdrop-filter: blur(18px);
+    border-radius: 3rem;
+    padding: 1.8rem 1.5rem 2rem;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+  }
+
+  .romantic-content h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #FFF5E6, #FFD966);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .sub-melody {
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+    color: #fff0dd;
+  }
+
+  .photo-moment {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 2rem;
+    padding: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .photo-frame {
+    width: 100%;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: #ffb7c5;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s;
+    display: block;
+  }
+
+  .photo-caption {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    background: rgba(0,0,0,0.3);
+    display: inline-block;
+    padding: 0.2rem 1.2rem;
+    border-radius: 40px;
+    color: #fff9e0;
+  }
+
+  .lyrics {
+    font-size: 1.6rem;
+    font-weight: 700;
+    min-height: 110px;
+    padding: 1rem 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2rem;
+    backdrop-filter: blur(8px);
+    color: #fff5f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .music-bars {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 15px 0;
+  }
+
+  .bar {
+    width: 5px;
+    height: 22px;
+    background: #ffecb3;
+    border-radius: 10px;
+    animation: soundWave 0.9s infinite alternate;
+  }
+
+  .bar:nth-child(2) { animation-delay: 0.2s; height: 34px; }
+  .bar:nth-child(3) { animation-delay: 0.4s; height: 26px; }
+  .bar:nth-child(4) { animation-delay: 0.1s; height: 30px; }
+  .bar:nth-child(5) { animation-delay: 0.3s; height: 20px; }
+
+  @keyframes soundWave {
+    0% { transform: scaleY(0.6); opacity: 0.6; background: #ffb7c5; }
+    100% { transform: scaleY(1.2); opacity: 1; background: #ff4d6d; }
+  }
+
+  .control-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 10px;
+  }
+
+  .small-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 40px;
+    color: white;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+  }
+
+  .fade-text {
+    animation: gentleFade 0.5s ease;
+  }
+
+  @keyframes gentleFade {
+    0% { opacity: 0; transform: translateY(12px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== LOVE NOTE SECTION (visible immediately after opening) ========== */
+  .love-note-section {
+    margin-top: 3rem;
+    width: 100%;
+    max-width: 600px;
+    padding: 0 1rem;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+  }
+
+  .note-card {
+    background: rgba(255, 240, 245, 0.2);
+    backdrop-filter: blur(20px);
+    border-radius: 2.5rem;
+    overflow: hidden;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,210,0.5);
+    transition: transform 0.3s;
+  }
+
+  .note-photo {
+    width: 100%;
+    aspect-ratio: 1.2 / 1;
+    overflow: hidden;
+  }
+
+  .note-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .note-photo:hover img {
+    transform: scale(1.02);
+  }
+
+  .note-text {
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+
+  .note-text h3 {
+    font-size: 2.2rem;
+    color: #fff3e0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    font-weight: 800;
+  }
+
+  .note-text p {
+    color: #fff0dd;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .down-arrow {
+    text-align: center;
+    margin: 1rem 0 2rem;
+    animation: bounce 1.8s infinite;
+    cursor: pointer;
+  }
+
+  .down-arrow span {
+    font-size: 2.5rem;
+    color: #fff0c0;
+    text-shadow: 0 0 8px #ff4d6d;
+    display: inline-block;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(12px); }
+  }
+
+  .scroll-hint {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    color: #ffe0b5;
+    text-align: center;
+  }
+
+  @media (max-width: 550px) {
+    .lyrics { font-size: 1.3rem; min-height: 95px; }
+    .note-text h3 { font-size: 1.8rem; }
+    .note-text p { font-size: 1rem; }
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="floatingHeartsContainer"></div>
+
+<div class="app-wrapper">
+  <!-- START SCREEN -->
+  <div id="startScreen" class="start-screen">
+    <div class="gift-icon">🎁</div>
+    <h2>a little surprise</h2>
+    <p>made with love, only for you 💕</p>
+    <button class="open-btn" id="openGiftBtn">✨ Open Your Gift ✨</button>
+  </div>
+
+  <!-- MAIN ROMANTIC CONTENT (song + lyrics + photos) -->
+  <div id="romanticContent" class="romantic-content">
+    <div class="glass-card">
+      <h1>💗 ONLY FOR YOU 💗</h1>
+      <div class="sub-melody">🎵 a Bharya of My Life 🎵</div>
+
+      <div class="photo-moment">
+        <div class="photo-frame" id="photoFrame">
+          <img id="lyricPhoto" src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&cs=tinysrgb&w=500&h=350&fit=crop" alt="romantic moment">
+        </div>
+        <div class="photo-caption" id="photoCaption">💖 precious memory 💖</div>
+      </div>
+
+      <div class="lyrics" id="lyrics">💗 ready for magic...</div>
+
+      <div class="music-bars">
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      </div>
+
+      <div class="control-buttons">
+        <button id="replayBtn" class="small-btn">⟳ Replay Song</button>
+      </div>
+      <div id="musicHint" style="font-size:0.7rem; margin-top:12px; opacity:0.8; color:#fff0dd;">💖 enjoy the rhythm of love 💖</div>
+    </div>
+
+    <!-- LOVE NOTE SECTION (visible right after opening the gift) -->
+    <div class="love-note-section" id="loveNoteSection">
+      <div class="down-arrow" id="scrollArrow">
+        <span>👇</span>
+        <div class="scroll-hint">scroll down for a love note</div>
+      </div>
+      <div class="note-card">
+        <div class="note-photo">
+          <img src="photo7.jpeg" alt="romantic sunset love">
+        </div>
+        <div class="note-text">
+          <h3>✨ For My Mheraru ✨</h3>
+          <p>Phele Sorry Madam, i love you yrr 💖 Mai na pgl hu jo kuch bhi bol deta hu... Mazak kiya tha per ye serious hogya kab pata nahi chala... ab maan jao naa i love you 😘🫣</p>
+          <p style="margin-top: 1rem;">— Yours Maggi</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio id="bgSong" src="song.mp3" preload="auto"></audio>
+
+<script>
+  (function() {
+    // DOM elements
+    const startScreen = document.getElementById('startScreen');
+    const romanticContent = document.getElementById('romanticContent');
+    const openBtn = document.getElementById('openGiftBtn');
+    const song = document.getElementById('bgSong');
+    const lyricsDiv = document.getElementById('lyrics');
+    const photoImg = document.getElementById('lyricPhoto');
+    const photoCaption = document.getElementById('photoCaption');
+    const replayBtn = document.getElementById('replayBtn');
+    const musicHint = document.getElementById('musicHint');
+    const scrollArrow = document.getElementById('scrollArrow');
+
+    // ========== LYRICS + PHOTO TIMELINE (romantic & custom) ==========
+    const timedMoments = [
+      { text: "✨ हमरा से पहले ना हमरा से केहु बाद ✨", time: 0, img: "photo1.jpeg", caption: "💖 first glance, forever yours" },
+      { text: "💕 Love you love you कही 💕", time: 3.6, img: "photo2.jpeg", caption: "💞 whispers of the heart" },
+      { text: "💗 हमरा से पहले ना हमरा से केहु बाद 💗", time: 6.0, img: "photo3.jpeg", caption: "🌹 you & me against the world" },
+      { text: "💞 Love you love you कही 💞", time: 9.5, img: "photo4.jpeg", caption: "💖 every heartbeat sings your name" },
+      { text: "❤️ हो love you love you कही ❤️", time: 12, img: "photo5.jpeg", caption: "✨ infinite love confession" },
+      { text: "😍 हमके बनाला बॉडीगॉर्ड ब्यूटी बनल रही 😍", time: 14, img: "photo6.jpeg", caption: "💘 my beautiful guardian" },
+      { text: "✨ हमके बनाला बॉडीगॉर्ड ब्यूटी बनल रही ✨", time: 18, img: "photo7.jpeg", caption: "🌟 you make my world shine" },
+      { text: "💌 हर दिन तुम्हारा नाम लिखूं 💌", time: 21.5, img: "photo1.jpeg", caption: "📖 writing our love story" },
+      { text: "🌹 तुम हो मेरी रौशनी 🌹", time: 24.8, img: "photo2.jpeg", caption: "💫 you are my light" },
+      { text: "💎 Forever & Always ❤️‍🔥", time: 28.2, img: "photo3.jpeg", caption: "💎 eternally yours" },
+      { text: "🌙 तुम हो मेरी चाँदनी 🌙", time: 31.5, img: "photo4.jpeg", caption: "✨ my moonlight, my everything" }
+    ];
+
+    let currentIndex = 0;
+    let timeUpdateAttached = false;
+
+    function preloadImages() {
+      timedMoments.forEach(m => { const img = new Image(); img.src = m.img; });
+      const loveImg = new Image(); loveImg.src = "https://images.pexels.com/photos/1398296/pexels-photo-1398296.jpeg?auto=compress&cs=tinysrgb&w=600&h=450&fit=crop";
+    }
+    preloadImages();
+
+    function updateLyricsAndPhoto(index) {
+      if (index >= timedMoments.length) return;
+      const moment = timedMoments[index];
+      lyricsDiv.classList.remove('fade-text');
+      void lyricsDiv.offsetWidth;
+      lyricsDiv.innerText = moment.text;
+      lyricsDiv.classList.add('fade-text');
+      if (photoImg.src !== moment.img) {
+        photoImg.style.opacity = '0';
+        setTimeout(() => { photoImg.src = moment.img; photoImg.style.opacity = '1'; }, 100);
+      } else photoImg.style.opacity = '1';
+      photoCaption.innerText = moment.caption;
+    }
+
+    function resetDisplay() {
+      currentIndex = 0;
+      if (timedMoments.length) updateLyricsAndPhoto(0);
+    }
+
+    function handleTimeUpdate() {
+      if (!song || song.paused || song.ended) return;
+      const curr = song.currentTime;
+      let newIdx = currentIndex;
+      for (let i = timedMoments.length-1; i >= 0; i--) {
+        if (curr >= timedMoments[i].time) { newIdx = i; break; }
+      }
+      if (newIdx !== currentIndex && newIdx < timedMoments.length) {
+        currentIndex = newIdx;
+        updateLyricsAndPhoto(currentIndex);
+      }
+    }
+
+    function startMusicAndSync() {
+      song.currentTime = 0;
+      resetDisplay();
+      song.play().then(() => {
+        if (!timeUpdateAttached) {
+          song.addEventListener('timeupdate', handleTimeUpdate);
+          timeUpdateAttached = true;
+        }
+        musicHint.innerText = "🎶 playing now – feel the love 🎶";
+      }).catch(() => { musicHint.innerText = "💕 tap anywhere to play music 💕"; });
+    }
+
+    function replaySong() {
+      song.currentTime = 0;
+      resetDisplay();
+      song.play().catch(()=>{});
+      musicHint.innerText = "✨ replaying for you ✨";
+      setTimeout(() => { if (!song.paused) musicHint.innerText = "🎶 lost in romance 🎶"; }, 1500);
+    }
+
+    // OPEN GIFT BUTTON: hides start screen, shows romantic content + love note
+    openBtn.addEventListener('click', () => {
+      startScreen.style.transition = 'opacity 0.4s ease, transform 0.3s';
+      startScreen.style.opacity = '0';
+      startScreen.style.transform = 'scale(0.96)';
+      setTimeout(() => {
+        startScreen.classList.add('hidden');
+        romanticContent.style.display = 'block';
+        startMusicAndSync();
+        // after showing, automatically scroll a bit to hint the note exists
+        setTimeout(() => {
+          const noteSection = document.getElementById('loveNoteSection');
+          if (noteSection) {
+            // gentle hint: animate arrow attention
+            const arrow = document.getElementById('scrollArrow');
+            if (arrow) arrow.style.animation = 'bounce 1.5s infinite';
+          }
+        }, 500);
+      }, 300);
+    });
+
+    // global click to help autoplay if needed
+    document.body.addEventListener('click', () => {
+      if (romanticContent.style.display === 'block' && song.paused && song.currentTime === 0) {
+        song.play().catch(()=>{});
+      }
+    });
+
+    replayBtn.addEventListener('click', (e) => { e.stopPropagation(); replaySong(); });
+
+    // song ended: show final message but love note already present
+    song.addEventListener('ended', () => {
+      lyricsDiv.innerText = "💗 You are my forever 💗";
+      lyricsDiv.classList.add('fade-text');
+      photoCaption.innerText = "❤️ always & forever yours ❤️";
+      musicHint.innerText = "💖 the love note below is for you 💖";
+    });
+
+    // Scroll arrow click: smoothly scroll to love note
+    if (scrollArrow) {
+      scrollArrow.addEventListener('click', () => {
+        const noteSection = document.getElementById('loveNoteSection');
+        if (noteSection) {
+          noteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    // floating hearts generator
+    function createFloatingHearts() {
+      const container = document.getElementById('floatingHeartsContainer');
+      if (!container) return;
+      setInterval(() => {
+        const heartSpan = document.createElement('div');
+        heartSpan.classList.add('floating-heart');
+        const heartsList = ['💖', '💕', '💗', '🌸', '🌹', '💘', '✨', '💞', '❤️', '🌺'];
+        heartSpan.innerText = heartsList[Math.floor(Math.random() * heartsList.length)];
+        heartSpan.style.left = Math.random() * 100 + '%';
+        heartSpan.style.fontSize = (Math.random() * 20 + 20) + 'px';
+        heartSpan.style.animationDuration = (Math.random() * 7 + 6) + 's';
+        heartSpan.style.opacity = Math.random() * 0.6 + 0.3;
+        container.appendChild(heartSpan);
+        setTimeout(() => { if(heartSpan && heartSpan.remove) heartSpan.remove(); }, 9000);
+      }, 800);
+    }
+    createFloatingHearts();
+  })();
+</script>
+</body>
+</html>
